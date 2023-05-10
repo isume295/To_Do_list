@@ -3,6 +3,12 @@ import status from './status.js';
 const list = document.querySelector('ul');
 const newInput = document.querySelector('.new-task');
 const errorMessage = document.querySelector('.error');
+
+const updateStorage = (localTasks, tasks) => {
+  localStorage.setItem(localTasks, JSON.stringify(tasks));
+  return localStorage.getItem(`${localTasks}`) ? JSON.parse(localStorage.getItem(`${localTasks}`)) : [];
+};
+
 export default class List {
   constructor() {
     this.tasks = JSON.parse(localStorage.getItem('tasks')) || [];
@@ -10,22 +16,24 @@ export default class List {
 
    removeList = (task) => {
      this.tasks = this.tasks.filter((t) => t !== task);
-     localStorage.setItem('tasks', JSON.stringify(this.tasks));
+     updateStorage('tasks', this.tasks);
      list.innerHTML = '';
+     return this.tasks;
    };
 
     addList = (task) => {
       this.tasks.push(task);
-      localStorage.setItem('tasks', JSON.stringify(this.tasks));
+      updateStorage('tasks', this.tasks);
       newInput.value = '';
       errorMessage.classList.add('error');
+      return this.tasks;
     };
 
     sort = () => {
       for (let i = 0; i < this.tasks.length; i += 1) {
         this.tasks[i].index = i + 1;
       }
-      localStorage.setItem('tasks', JSON.stringify(this.tasks));
+      updateStorage('tasks', this.tasks);
     };
 
     updateList = (task, t, icon) => {
@@ -42,7 +50,7 @@ export default class List {
       completeUpdate = (task) => {
         task.readOnly = true;
         list.innerHTML = '';
-        localStorage.setItem('tasks', JSON.stringify(this.tasks));
+        updateStorage('tasks', this.tasks);
       };
 
       display = () => {
@@ -92,7 +100,7 @@ export default class List {
         checkList.forEach((btn, index) => {
           btn.addEventListener('click', () => {
             status(this.tasks[index]);
-            localStorage.setItem('tasks', JSON.stringify(this.tasks));
+            updateStorage('tasks', this.tasks);
           });
         });
       };
