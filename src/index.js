@@ -23,7 +23,7 @@ document.querySelector('.add-list').addEventListener('click', (e) => {
       document.querySelector('.list-container').classList.remove('shake');
     }, 1000);
   } else {
-    const newTask = new Task(newInput.value, false, i + 1);
+    const newTask = new Task(newInput.value, i + 1);
     list.addList(newTask);
     list.display();
   }

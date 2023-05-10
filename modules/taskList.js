@@ -8,8 +8,7 @@ const updateStorage = (localTasks, tasks) => {
   localStorage.setItem(localTasks, JSON.stringify(tasks));
   return localStorage.getItem(`${localTasks}`) ? JSON.parse(localStorage.getItem(`${localTasks}`)) : [];
 };
-
-export default class List {
+class List {
   constructor() {
     this.tasks = JSON.parse(localStorage.getItem('tasks')) || [];
   }
@@ -105,3 +104,5 @@ export default class List {
         });
       };
 }
+
+export { List, updateStorage };
