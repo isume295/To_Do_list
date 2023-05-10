@@ -66,12 +66,13 @@ class List {
                 </li>
               `
     ), '');
+
     const deleteList = document.querySelectorAll('.delete');
     deleteList.forEach((btn, index) => {
       btn.addEventListener('click', () => {
         this.removeList(this.tasks[index], list);
         this.sort();
-        this.display();
+        this.display(list);
       });
     });
     const editList = document.querySelectorAll('.edit');
@@ -97,6 +98,7 @@ class List {
         updateStorage('tasks', this.tasks);
       });
     });
+    return list;
   };
 }
 
