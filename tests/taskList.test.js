@@ -22,8 +22,24 @@ describe('test add method', () => {
   </div>`;
   const newInput = document.querySelector('.new-task');
   const errorMessage = document.querySelector('.error');
+  const task1 = new Task('item1', 1);
+  const task2 = new Task('item2', 2);
+  const task3 = new Task('item3', 3);
+  const task4 = new Task('item4', 4);
 
-  test('should first', () => {
-    expect(list.addList(new Task('item1', 1), newInput, errorMessage)).toEqual([{ description: 'item1', index: 1, completed: false }]);
+  test('First element', () => {
+    expect(list.addList(task1, newInput, errorMessage)).toEqual([task1]);
+  });
+
+  test('Secont element', () => {
+    expect(list.addList(task2, newInput, errorMessage)).toEqual([task1, task2]);
+  });
+
+  test('Third element', () => {
+    expect(list.addList(task3, newInput, errorMessage)).toEqual([task1, task2, task3]);
+  });
+
+  test('Forth element', () => {
+    expect(list.addList(task4, newInput, errorMessage)).toEqual([task1, task2, task3, task4]);
   });
 });
