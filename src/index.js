@@ -2,14 +2,16 @@ import './style.css';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import '@fortawesome/fontawesome-free/css/all.css';
 import Task from '../modules/tasks.js';
-import List from '../modules/taskList.js';
+import { List } from '../modules/taskList.js';
 
 const newInput = document.querySelector('.new-task');
 const errorMessage = document.querySelector('.error');
+const listCtn = document.querySelector('ul');
+
 const list = new List();
 
 window.onload = () => {
-  list.display();
+  list.display(listCtn);
 };
 
 document.querySelector('.add-list').addEventListener('click', (e) => {
@@ -24,8 +26,8 @@ document.querySelector('.add-list').addEventListener('click', (e) => {
     }, 1000);
   } else {
     const newTask = new Task(newInput.value, i + 1);
-    list.addList(newTask);
-    list.display();
+    list.addList(newTask, newInput, errorMessage);
+    list.display(listCtn);
   }
 });
 
@@ -33,5 +35,5 @@ const clearAll = document.querySelector('.clearAll');
 clearAll.addEventListener('click', () => {
   list.tasks = list.tasks.filter((task) => task.completed === false);
   localStorage.setItem('tasks', JSON.stringify(list.tasks));
-  list.display();
+  list.display(listCtn);
 });
