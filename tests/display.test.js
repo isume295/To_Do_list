@@ -33,24 +33,24 @@ describe('test diplay method after adding/deleting a task', () => {
     const child = list.display(listCtnn).children;
     expect(child).toHaveLength(1);
   });
-  test('display task2', () => {
+  test('append task2 and display', () => {
     list.addList(task2, newInput, errorMessage);
     const child = list.display(listCtnn).children;
     expect(child).toHaveLength(2);
   });
-  test('display task3', () => {
+  test('append task3 and display', () => {
     list.addList(task3, newInput, errorMessage);
     const child = list.display(listCtnn).children;
     expect(child).toHaveLength(3);
   });
 
-  test('display removed task3', () => {
+  test('removed task3 and display', () => {
     list.removeList(task3, listCtnn);
     const child = list.display(listCtnn).children;
     expect(child).toHaveLength(2);
   });
 
-  test('display removed task1', () => {
+  test('removed task1 and display', () => {
     list.removeList(task2, listCtnn);
     const child = list.display(listCtnn).children;
     expect(child).toHaveLength(1);
