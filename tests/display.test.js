@@ -50,7 +50,7 @@ describe('test diplay method after adding/deleting a task', () => {
     expect(child).toHaveLength(2);
   });
 
-  test('removed task1 and display', () => {
+  test('removed task2 and display', () => {
     list.removeList(task2, listCtnn);
     const child = list.display(listCtnn).children;
     expect(child).toHaveLength(1);
