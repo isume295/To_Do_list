@@ -3,6 +3,7 @@ import './style.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 import Task from '../modules/tasks.js';
 import { List } from '../modules/taskList.js';
+import clearAllFn from '../modules/clearAll.js';
 
 const newInput = document.querySelector('.new-task');
 const errorMessage = document.querySelector('.error');
@@ -12,7 +13,6 @@ const list = new List();
 
 window.onload = () => {
   list.display(listCtn);
-  console.log(listCtn);
 };
 
 document.querySelector('.add-list').addEventListener('click', (e) => {
@@ -34,16 +34,8 @@ document.querySelector('.add-list').addEventListener('click', (e) => {
 
 const clearAll = document.querySelector('.clearAll');
 clearAll.addEventListener('click', () => {
-  list.tasks = list.tasks.filter((task) => task.completed === false);
-  localStorage.setItem('tasks', JSON.stringify(list.tasks));
+  clearAllFn(list);
   list.display(listCtn);
 });
 
-const deleteList = document.querySelectorAll('.delete');
-deleteList.forEach((btn, index) => {
-  btn.addEventListener('click', () => {
-    this.removeList(this.tasks[index], list);
-    this.sort();
-    this.display(list);
-  });
-});
+export default clearAllFn;
