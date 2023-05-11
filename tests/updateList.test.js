@@ -25,7 +25,7 @@ describe('test updateStorage method', () => {
   });
 });
 
-describe('test updateStorage method', () => {
+describe('test updateDescrip method', () => {
   document.body.innerHTML = `        <div class="main-container">
   <label class="error">error</label>
   <div class="list-container">
