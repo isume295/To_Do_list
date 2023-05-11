@@ -4,6 +4,12 @@ const updateStorage = (localTasks, tasks) => {
   localStorage.setItem(localTasks, JSON.stringify(tasks));
   return localStorage.getItem(`${localTasks}`) ? JSON.parse(localStorage.getItem(`${localTasks}`)) : [];
 };
+
+const descripEvent = (e, index, list) => {
+  const itemValue = e.target.value;
+  list.updateDescrip(itemValue, index);
+};
+
 class List {
   constructor() {
     this.tasks = JSON.parse(localStorage.getItem('tasks')) || [];
@@ -31,16 +37,21 @@ class List {
     updateStorage('tasks', this.tasks);
   };
 
-  updateList = (task, t, icon) => {
+  updateDescrip(value, index) {
+    this.tasks[index].description = value;
+    return this.tasks[index];
+  }
+
+  updateList = (task, t, icon, index) => {
     icon.classList.toggle('fa-pen-to-square');
     icon.classList.toggle('fa-check');
     task.readOnly = false;
     task.focus();
-    task.addEventListener('input', function update() {
-      task.value = this.value;
-      t.description = task.value;
+    task.addEventListener('input', (e) => {
+      const itemValue = e.target.value;
+      this.updateDescrip(itemValue, index);
     });
-    return task;
+    return this.tasks;
   };
 
   completeUpdate = (task, list) => {
@@ -84,7 +95,7 @@ class List {
       let c = 0;
       btn.addEventListener('click', () => {
         if (c % 2 === 0) {
-          this.updateList(inputTask[index], this.tasks[index], editIcon[index]);
+          this.updateList(inputTask[index], this.tasks[index], editIcon[index], index);
           c += 1;
         } else {
           this.completeUpdate(inputTask[index], list);
