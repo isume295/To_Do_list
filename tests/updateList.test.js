@@ -16,8 +16,8 @@ describe('test updateStorage method', () => {
     expect(updateStorage('tasks', list)).toEqual([1]);
   });
 
-  test('add array with an object to local storage', () => { 
+  test('add array with an object to local storage', () => {
     list.push({ task: 'task1', index: 1, status: false });
-    expect(updateStorage('tasks', list)).toEqual([1, { task: 'task1', index: 1, status: false}]);
+    expect(updateStorage('tasks', list)).toEqual([1, { task: 'task1', index: 1, status: false }]);
   });
 });

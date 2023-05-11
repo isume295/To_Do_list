@@ -40,12 +40,14 @@ class List {
       task.value = this.value;
       t.description = task.value;
     });
+    return task;
   };
 
   completeUpdate = (task, list) => {
     task.readOnly = true;
     list.innerHTML = '';
     updateStorage('tasks', this.tasks);
+    return this.tasks;
   };
 
   display = (list) => {
@@ -85,8 +87,8 @@ class List {
           this.updateList(inputTask[index], this.tasks[index], editIcon[index]);
           c += 1;
         } else {
-          this.completeUpdate(inputTask[index]);
-          this.display();
+          this.completeUpdate(inputTask[index], list);
+          this.display(list);
           c += 1;
         }
       });
