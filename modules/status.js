@@ -4,4 +4,5 @@ export default function status(task) {
   } else if (task.completed) {
     task.completed = false;
   }
+  return task;
 }
